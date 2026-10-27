@@ -1,0 +1,129 @@
+# Конфигурация Decap CMS — админки сайта
+# Этот файл описывает все поля, которые владелец видит в админке.
+# Если нужно добавить новое поле — добавьте его сюда.
+
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: 'Создано: {{collection}} — {{slug}}'
+    update: 'Обновлено: {{collection}} — {{slug}}'
+    delete: 'Удалено: {{collection}} — {{slug}}'
+    uploadMedia: 'Загружено изображение: {{path}}'
+    deleteMedia: 'Удалено изображение: {{path}}'
+
+# Локализация админки на русский язык
+locale: 'ru'
+
+# Папка для загрузки изображений
+media_folder: 'public/images'
+public_folder: '/images'
+
+# Включаем редактирование черновиков
+publish_mode: editorial_workflow
+
+# === КОЛЛЕКЦИИ КОНТЕНТА ===
+# Каждая коллекция = один раздел админки
+
+collections:
+  # ==========================================
+  # 1. МЕРОПРИЯТИЯ
+  # ==========================================
+  - name: 'events'
+    label: 'Мероприятия'
+    label_singular: 'Мероприятие'
+    folder: 'src/content/events'
+    create: true
+    delete: true
+    slug: '{{slug}}-{{year}}-{{month}}-{{day}}'
+    summary: '{{title}} — {{dateLabel}}'
+    fields:
+      - { name: 'title', label: 'Название', widget: 'string' }
+      - { name: 'date', label: 'Дата (ISO)', widget: 'datetime', date_format: 'YYYY-MM-DD', time_format: false, hint: 'Используется для сортировки. Формат: 2026-11-15' }
+      - { name: 'dateLabel', label: 'Дата (отображается на сайте)', widget: 'string', hint: 'Например: 15 ноября или 15 ноября 2026' }
+      - name: 'type'
+        label: 'Тип мероприятия'
+        widget: 'select'
+        options: ['Бал', 'Семинар', 'Вечер', 'Мастер-класс', 'Лекция']
+        default: 'Вечер'
+      - { name: 'description', label: 'Описание', widget: 'text', hint: '2-4 предложения: что будет, для кого, что взять с собой' }
+      - { name: 'time', label: 'Время', widget: 'string', hint: 'Например: 19:00 — 22:00' }
+      - { name: 'place', label: 'Место', widget: 'string', default: 'Большой зал' }
+      - { name: 'signupUrl', label: 'Ссылка на запись (Яндекс.Форма или Telegram)', widget: 'string', hint: 'URL формы, на которую ведёт кнопка «Записаться на участие»' }
+      - { name: 'published', label: 'Опубликовано?', widget: 'boolean', default: true }
+
+  # ==========================================
+  # 2. ОБУЧАЮЩИЕ МАТЕРИАЛЫ
+  # ==========================================
+  - name: 'materials'
+    label: 'Обучающие материалы'
+    label_singular: 'Материал'
+    folder: 'src/content/materials'
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    summary: '{{type}}: {{title}}'
+    fields:
+      - { name: 'title', label: 'Заголовок', widget: 'string' }
+      - name: 'type'
+        label: 'Тип контента'
+        widget: 'select'
+        options: ['Видео', 'Статья', 'Методичка']
+        default: 'Видео'
+      - { name: 'description', label: 'Краткое описание', widget: 'text', hint: '2-3 предложения' }
+      - { name: 'duration', label: 'Длительность / объём', widget: 'string', hint: 'Например: 12 минут, 8 страниц, 7 минут чтения' }
+      - name: 'level'
+        label: 'Уровень сложности'
+        widget: 'select'
+        options: ['Для всех', 'Начальный', 'Средний', 'Продолжающий']
+        default: 'Для всех'
+      - name: 'direction'
+        label: 'Направление'
+        widget: 'select'
+        options: ['Европейская', 'Латина', 'Историко-бытовые', 'Социальные', 'Общее']
+        default: 'Общее'
+      - { name: 'link', label: 'Ссылка на Яндекс.Диск', widget: 'string', hint: 'ОБЯЗАТЕЛЬНО: на Яндекс.Диске настройте «Доступ по ссылке»!' }
+      - { name: 'published', label: 'Опубликовано?', widget: 'boolean', default: true }
+
+  # ==========================================
+  # 3. ТРЕНЕРЫ
+  # ==========================================
+  - name: 'coaches'
+    label: 'Тренеры'
+    label_singular: 'Тренер'
+    folder: 'src/content/coaches'
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    summary: '{{name}} — {{specialization}}'
+    fields:
+      - { name: 'name', label: 'Имя и фамилия', widget: 'string' }
+      - { name: 'photo', label: 'Фото', widget: 'image', required: false }
+      - { name: 'experience', label: 'Стаж преподавания', widget: 'string', hint: 'Например: 12 лет' }
+      - { name: 'specialization', label: 'Специализация', widget: 'string', hint: 'Например: Латина, самба, румба' }
+      - { name: 'teachingStyle', label: 'Стиль преподавания', widget: 'text' }
+      - { name: 'achievements', label: 'Достижения', widget: 'text', required: false }
+      - { name: 'contact', label: 'Контакт (Telegram или телефон)', widget: 'string', required: false }
+      - { name: 'published', label: 'Опубликовано?', widget: 'boolean', default: true }
+
+  # ==========================================
+  # 4. FAQ — ЧАСТЫЕ ВОПРОСЫ
+  # ==========================================
+  - name: 'faq'
+    label: 'Частые вопросы (FAQ)'
+    label_singular: 'Вопрос'
+    folder: 'src/content/faq'
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    summary: '{{question}}'
+    fields:
+      - { name: 'question', label: 'Вопрос', widget: 'string' }
+      - { name: 'answer', label: 'Ответ', widget: 'text' }
+      - name: 'category'
+        label: 'Категория'
+        widget: 'select'
+        options: ['Одежда', 'Партнёр', 'Запись', 'Оплата', 'Общее']
+        default: 'Общее'
+      - { name: 'order', label: 'Порядок отображения', widget: 'number', default: 0, hint: 'Чем меньше число — тем выше в списке' }
+      - { name: 'published', label: 'Опубликовано?', widget: 'boolean', default: true }
