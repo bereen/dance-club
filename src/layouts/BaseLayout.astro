@@ -1,0 +1,65 @@
+---
+// src/layouts/BaseLayout.astro
+// Базовый шаблон страницы — подключает шрифты, Tailwind, общую структуру
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Клуб бальных танцев для взрослых 30+. С нуля и без стресса. Понятные шаги, поддерживающие тренеры.',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <!-- Шрифты Noto Sans + Noto Serif для русского текста -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- a11y: крупный базовый шрифт (минимум 16px по требованию) -->
+  <style>
+    body { font-size: 18px; }
+    @media (max-width: 640px) { body { font-size: 17px; } }
+    html { scroll-behavior: smooth; }
+    *:focus-visible { outline: 3px solid #C8745A; outline-offset: 2px; }
+  </style>
+</head>
+<body class="bg-cream text-warmgray font-sans antialiased">
+
+  <!-- Простая навигация (можно расширять) -->
+  <header class="bg-bordo text-cream">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between" aria-label="Главная навигация">
+      <a href="/" class="font-display text-xl font-bold">Танцы для взрослых</a>
+      <ul class="hidden sm:flex gap-6 text-sm">
+        <li><a href="/" class="hover:text-terra-light transition-colors">Главная</a></li>
+        <li><a href="/events" class="hover:text-terra-light transition-colors">Мероприятия</a></li>
+        <li><a href="/materials" class="hover:text-terra-light transition-colors">Материалы</a></li>
+        <li><a href="/#zapis" class="hover:text-terra-light transition-colors">Записаться</a></li>
+      </ul>
+      <!-- Кнопка записи — всегда видна на мобильных -->
+      <a href="/#zapis" class="sm:hidden px-4 py-2 rounded-lg bg-terra text-white text-sm font-semibold">
+        Записаться
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="bg-bordo-dark text-cream/80 py-10 px-6 mt-16">
+    <div class="max-w-6xl mx-auto text-center text-sm">
+      <p>© 2026 Клуб бальных танцев «Танцы для взрослых».</p>
+      <p class="mt-1 text-cream/60">Телефон: +7 (XXX) XXX-XX-XX · <a href="mailto:info@сайт.рф" class="underline hover:text-terra-light">info@сайт.рф</a></p>
+    </div>
+  </footer>
+</body>
+</html>
