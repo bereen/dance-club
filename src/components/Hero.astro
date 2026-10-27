@@ -1,0 +1,50 @@
+---
+// src/components/Hero.astro
+// Главный экран сайта — заголовок, подзаголовок, 2 кнопки CTA
+---
+<section class="relative overflow-hidden bg-bordo-dark text-cream" aria-labelledby="hero-title">
+  <div class="absolute inset-0 bg-gradient-to-br from-bordo-dark via-bordo to-[#5A2333] opacity-95"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 py-16 sm:py-24 lg:py-32">
+    <div class="max-w-3xl">
+      <span class="inline-block mb-6 px-4 py-2 rounded-full bg-terra/20 text-terra-light text-sm font-medium tracking-wide uppercase">
+        Клуб бальных танцев · для взрослых 30+
+      </span>
+
+      <h1 id="hero-title" class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+        Танцы для взрослых —<br class="hidden sm:block" />
+        <span class="text-terra-light">с нуля и без стресса</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-cream/90 mb-10 leading-relaxed max-w-2xl">
+        Здесь безопасно учиться, даже если вы никогда не танцевали.
+        Понятные шаги, поддерживающие тренеры, дружелюбная атмосфера —
+        без пафоса и сравнений с другими.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/#zapis" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-terra hover:bg-terra-light text-white font-semibold text-lg shadow-lg shadow-terra/30 transition-all duration-200 hover:-translate-y-0.5 min-h-[56px]">
+          Записаться на пробное
+        </a>
+        <a href="#raspisanie" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-transparent border-2 border-cream/40 hover:border-cream text-cream font-semibold text-lg transition-all duration-200 hover:-translate-y-0.5 min-h-[56px]">
+          Смотреть расписание
+        </a>
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-cream/80">
+        <span class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-terra-light" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd" fill-rule="evenodd"/></svg>
+          Парнёр не требуется
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-terra-light" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd" fill-rule="evenodd"/></svg>
+          Группа для новичков
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-terra-light" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd" fill-rule="evenodd"/></svg>
+          Первое занятие бесплатно
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

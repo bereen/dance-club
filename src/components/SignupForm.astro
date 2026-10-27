@@ -1,0 +1,73 @@
+---
+// src/components/SignupForm.astro
+// Универсальная форма записи на пробное занятие
+// Данные отправляются в Яндекс.Форму — замените URL в атрибуте action
+export interface Props {
+  formAction?: string; // URL Яндекс.Формы
+}
+const { formAction = 'https://forms.yandex.ru/u/EXAMPLE' } = Astro.props;
+---
+<section id="zapis" class="bg-bordo-dark text-cream py-16 sm:py-24" aria-labelledby="form-title">
+  <div class="max-w-2xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 id="form-title" class="font-display text-3xl sm:text-4xl font-bold mb-3">
+        Записаться на пробное занятие
+      </h2>
+      <p class="text-cream/80">
+        Заполните короткую форму — мы перезвоним в течение дня и поможем
+        выбрать направление.
+      </p>
+    </div>
+
+    <form action={formAction} method="POST" class="bg-white text-warmgray rounded-2xl shadow-2xl p-6 sm:p-8 space-y-5" aria-label="Форма записи на пробное занятие">
+      <div>
+        <label for="name" class="block text-base font-semibold mb-2">
+          Ваше имя <span class="text-terra-dark" aria-hidden="true">*</span>
+        </label>
+        <input type="text" id="name" name="name" required autocomplete="name" placeholder="Например, Анна" class="w-full px-4 py-3 rounded-xl border-2 border-sand focus:border-terra outline-none text-base min-h-[52px] transition-colors" />
+      </div>
+
+      <div>
+        <label for="phone" class="block text-base font-semibold mb-2">
+          Телефон <span class="text-terra-dark" aria-hidden="true">*</span>
+        </label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+7 (___) ___-__-__" class="w-full px-4 py-3 rounded-xl border-2 border-sand focus:border-terra outline-none text-base min-h-[52px] transition-colors" />
+      </div>
+
+      <div>
+        <label for="direction" class="block text-base font-semibold mb-2">
+          Интересующее направление
+        </label>
+        <select id="direction" name="direction" class="w-full px-4 py-3 rounded-xl border-2 border-sand focus:border-terra outline-none text-base min-h-[52px] transition-colors bg-white">
+          <option value="">— Не выбрано —</option>
+          <option value="beginner">Для начинающих (с нуля)</option>
+          <option value="europe">Европейская программа</option>
+          <option value="latin">Латина</option>
+          <option value="social">Социальные танцы</option>
+          <option value="historical">Историко-бытовые танцы</option>
+          <option value="practice">Практика / вечера</option>
+        </select>
+      </div>
+
+      <div class="pt-2">
+        <label for="consent" class="flex items-start gap-3 cursor-pointer">
+          <input type="checkbox" id="consent" name="consent" required class="mt-1 w-5 h-5 rounded border-2 border-sand text-terra-dark focus:ring-2 focus:ring-terra focus:ring-offset-0 cursor-pointer flex-shrink-0" />
+          <span class="text-base leading-snug text-warmgray/90">
+            Я согласен(на) на обработку персональных данных и принимаю
+            <a href="/privacy" class="text-terra-dark underline hover:text-terra">политику конфиденциальности</a>.
+            <span class="text-terra-dark" aria-hidden="true">*</span>
+          </span>
+        </label>
+      </div>
+
+      <button type="submit" class="w-full px-6 py-4 rounded-xl bg-terra hover:bg-terra-light text-white font-semibold text-lg shadow-lg shadow-terra/30 transition-all duration-200 hover:-translate-y-0.5 min-h-[56px]">
+        Отправить заявку
+      </button>
+
+      <p class="text-sm text-warmgray/60 text-center pt-2">
+        Нажимая «Отправить заявку», вы даёте согласие на обработку
+        персональных данных. Мы не передаём данные третьим лицам.
+      </p>
+    </form>
+  </div>
+</section>
