@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Админка — Танцы для взрослых</title>
+  <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css" />
+  <link rel="stylesheet" href="https://unpkg.com/netlify-cms-app@^2.15.0/dist/netlify-cms-app.css" />
+</head>
+<body>
+  <!-- Включаем Decap CMS -->
+  <script src="https://unpkg.com/netlify-cms-app@^2.15.0/dist/netlify-cms-app.js"></script>
+  <script>
+    // Регистрируем дополнительную локаль для русских подписей
+    CMS.registerLocale('ru', {
+      app: {
+        editor: {
+          editor: { toolbar: { publish: 'Опубликовать', unpublish: 'Снять с публикации', publishAndDuplicate: 'Опубликовать и дублировать' } },
+        },
+      },
+    });
+  </script>
+</body>
+</html>
