@@ -1,48 +1,49 @@
----
-// src/content/config.ts
-// Описание коллекций контента для Decap CMS
-// Эти коллекции видны в админке по адресу /admin
-
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
-// Коллекция «Мероприятия»
+// ============================================================
+// OPISANIE KOLLEKCIY KONTENTA DLYA DECAP CMS
+// Kazhdaya kollekciya = odin razdel adminiki po adresu /admin
+// ============================================================
+
+// 1. MEROPRIYATIYA
 const eventsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
   schema: z.object({
     title: z.string(),
-    date: z.string(),                    // '2026-11-15'
-    dateLabel: z.string(),               // '15 ноября'
+    date: z.string(),
+    dateLabel: z.string(),
     type: z.enum(['Бал', 'Семинар', 'Вечер', 'Мастер-класс', 'Лекция']),
     description: z.string(),
-    time: z.string(),                    // '19:00 — 22:00'
+    time: z.string(),
     place: z.string().optional().default('Большой зал'),
-    signupUrl: z.string(),                // ссылка на форму записи
+    signupUrl: z.string(),
     published: z.boolean().default(true),
   }),
 });
 
-// Коллекция «Обучающие материалы»
+// 2. OBUCHAYUSHCHIE MATERIALY
 const materialsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/materials' }),
   schema: z.object({
     title: z.string(),
     type: z.enum(['Видео', 'Статья', 'Методичка']),
     description: z.string(),
     duration: z.string().optional().default(''),
     level: z.enum(['Для всех', 'Начальный', 'Средний', 'Продолжающий']).default('Для всех'),
-    link: z.string().url(),               // ссылка на Яндекс.Диск (обязательно публичная!)
     direction: z.enum(['Европейская', 'Латина', 'Историко-бытовые', 'Социальные', 'Общее']).default('Общее'),
+    link: z.string().url(),
     published: z.boolean().default(true),
   }),
 });
 
-// Коллекция «Тренеры»
+// 3. TRENERY
 const coachesCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/coaches' }),
   schema: z.object({
     name: z.string(),
     photo: z.string().optional(),
-    experience: z.string(),               // '12 лет'
+    experience: z.string(),
     specialization: z.string(),
     teachingStyle: z.string(),
     achievements: z.string().optional(),
@@ -51,9 +52,9 @@ const coachesCollection = defineCollection({
   }),
 });
 
-// Коллекция «FAQ»
+// 4. FAQ
 const faqCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/faq' }),
   schema: z.object({
     question: z.string(),
     answer: z.string(),
