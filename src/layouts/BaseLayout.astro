@@ -19,24 +19,24 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
 
-  <!-- ШРИФТЫ: self-hosting (лайт сайта, не ждут Google Fonts).
-       Раньше шрифты грузились с fonts.googleapis.com — это было самое медленное
-       место сайта (2-4 секунды, а бывают отказы). Теперь файлы лежат в /public/fonts -->
+  <!-- SHRIFTY: samhosting (layat seajte, ne zhdut Google Fonts).
+       Ranshe shrifty gruzilis' s fonts.googleapis.com — eto bylo samoe medlennoe
+       mesto sajta (2-4 sekundy, a byvayut otkazy). Teper' faily lezhat v /src/fonts -->
   <link rel="preload" href="/fonts/noto-sans-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/noto-serif-600.woff2" as="font" type="font/woff2" crossorigin />
   <style is:global>
-    /* Noto Sans — текст */
+    /* Noto Sans — tekst */
     @font-face { font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/noto-sans-400.woff2') format('woff2'); }
     @font-face { font-family: 'Noto Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/noto-sans-500.woff2') format('woff2'); }
     @font-face { font-family: 'Noto Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/noto-sans-600.woff2') format('woff2'); }
     @font-face { font-family: 'Noto Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/noto-sans-700.woff2') format('woff2'); }
-    /* Noto Serif — заголовки */
+    /* Noto Serif — zagolovki */
     @font-face { font-family: 'Noto Serif'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/noto-serif-500.woff2') format('woff2'); }
     @font-face { font-family: 'Noto Serif'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/noto-serif-600.woff2') format('woff2'); }
     @font-face { font-family: 'Noto Serif'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/noto-serif-700.woff2') format('woff2'); }
   </style>
 
-  <!-- a11y: крупный базовый шрифт -->
+  <!-- a11y: крупный базовый шрифт (минимум 16px по требованию) -->
   <style>
     body { font-size: 18px; }
     @media (max-width: 640px) { body { font-size: 17px; } }
