@@ -1,5 +1,6 @@
 ---
 // src/pages/about.astro — Страница «О клубе»
+// История клуба + тренеры (подтягиваются из src/content/coaches) + контакты и карта Яндекс
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
@@ -13,7 +14,7 @@ const coaches = await getCollection('coaches', ({ data }) => data.published);
       сегодня у нас занимаются десятки человек, которые пришли в танцы после 30, 40 и 60 лет.
     </p>
 
-    <!-- ИСТОРИЯ СОЗДАНИЯ -->
+    <!-- ISTORIYA SOZDANIYA -->
     <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 mb-16 max-w-3xl">
       <h2 class="font-display text-2xl sm:text-3xl font-bold text-bordo mb-6">Наша история</h2>
       <ul class="space-y-6 text-warmgray/90 leading-relaxed list-none">
@@ -40,11 +41,12 @@ const coaches = await getCollection('coaches', ({ data }) => data.published);
         </li>
       </ul>
       <p class="mt-8 italic text-warmgray/70">
-        * Это временный текст-заглушка. Замените его на свою настоящую историю.
+        * Это временный текст-заглушка. Замените его на свою настоящую историю —
+        через GitHub Desktop или попросите нейросеть переписать по вашим фактам.
       </p>
     </div>
 
-    <!-- ТРЕНЕРЫ -->
+    <!-- TRENERY -->
     <h2 class="font-display text-3xl font-bold text-bordo mb-3">Наши тренеры</h2>
     <p class="text-warmgray/80 mb-10 max-w-2xl">
       Люди, которые спокойно и бережно ведут вас в танец с самого первого шага.
@@ -85,7 +87,7 @@ const coaches = await getCollection('coaches', ({ data }) => data.published);
       <p class="text-warmgray/70 italic mb-16">Информация о тренерах скоро появится.</p>
     )}
 
-    <!-- КОНТАКТЫ И КАРТА -->
+    <!-- KONTAKTY I KARTA -->
     <h2 id="kontakty" class="font-display text-3xl font-bold text-bordo mb-3">Контакты</h2>
     <p class="text-warmgray/80 mb-8 max-w-2xl">
       Приходите — покажем зал и ответим на вопросы. Лучше заранее записаться по телефону
@@ -109,7 +111,7 @@ const coaches = await getCollection('coaches', ({ data }) => data.published);
         </p>
       </div>
 
-      <!-- Яндекс.Карты: iframe с lazy-loading -->
+      <!-- YANDEKS KARTY: iframe c lazy-loading — карта грузится только при прокрутке до неё -->
       <div class="rounded-2xl overflow-hidden shadow-lg min-h-[380px] bg-sand">
         <iframe
           src="https://yandex.ru/map-widget/v1/?url=https%3A%2F%2Fyandex.ru%2Fmaps%2F-%2FCXbhAWl1"
