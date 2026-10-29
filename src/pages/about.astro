@@ -1,0 +1,130 @@
+---
+// src/pages/about.astro — Страница «О клубе»
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const coaches = await getCollection('coaches', ({ data }) => data.published);
+---
+<BaseLayout title="О клубе — Танцы для взрослых" description="История клуба бальных танцев для взрослых 30+, наши тренеры, контакты и как нас найти.">
+  <section class="max-w-6xl mx-auto px-6 py-16 sm:py-24">
+    <h1 class="font-display text-4xl font-bold text-bordo mb-4">О клубе</h1>
+    <p class="text-warmgray/80 max-w-2xl mb-12">
+      Клуб бальных танцев для взрослых. Мы начинали с одной группы в маленьком зале —
+      сегодня у нас занимаются десятки человек, которые пришли в танцы после 30, 40 и 60 лет.
+    </p>
+
+    <!-- ИСТОРИЯ СОЗДАНИЯ -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 mb-16 max-w-3xl">
+      <h2 class="font-display text-2xl sm:text-3xl font-bold text-bordo mb-6">Наша история</h2>
+      <ul class="space-y-6 text-warmgray/90 leading-relaxed list-none">
+        <li>
+          <span class="block font-semibold text-terra-dark text-base mb-1">2019 год — всё началось</span>
+          Основательница клуба Ирина Берестень вернулась в город после многих лет работы
+          с детьми и решила: взрослые тоже имеют право красиво танцевать — без соревнований,
+          оценок и «я слишком старый для этого».
+        </li>
+        <li>
+          <span class="block font-semibold text-terra-dark text-base mb-1">2021 год — первая своя студия</span>
+          Появился собственный зал с зеркалами и нормальным паркетом. Открылись группы
+          европейской и латиноамериканской программ для начинающих.
+        </li>
+        <li>
+          <span class="block font-semibold text-terra-dark text-base mb-1">2023 год — вечерние практики</span>
+          Мы запустили еженедельные практики «для своих»: можно отработать шаги, пообщаться
+          и просто потанцевать в спокойной дружелюбной компании.
+        </li>
+        <li>
+          <span class="block font-semibold text-terra-dark text-base mb-1">2026 год — Осенний бал</span>
+          Провели первый открытый бал для учеников и их гостей. Теперь это наша добрая
+          ежегодная традиция — приглашаем и вас.
+        </li>
+      </ul>
+      <p class="mt-8 italic text-warmgray/70">
+        * Это временный текст-заглушка. Замените его на свою настоящую историю.
+      </p>
+    </div>
+
+    <!-- ТРЕНЕРЫ -->
+    <h2 class="font-display text-3xl font-bold text-bordo mb-3">Наши тренеры</h2>
+    <p class="text-warmgray/80 mb-10 max-w-2xl">
+      Люди, которые спокойно и бережно ведут вас в танец с самого первого шага.
+    </p>
+
+    {coaches.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {coaches.map((coach) => (
+          <article class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 flex gap-5 items-start">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-sand border-2 border-terra/40 flex items-center justify-center flex-shrink-0 overflow-hidden">
+              {coach.data.photo ? (
+                <img src={coach.data.photo} alt={`Фото: ${coach.data.name}`} loading="lazy" decoding="async" class="w-full h-full object-cover" />
+              ) : (
+                <span class="font-display text-2xl font-bold text-bordo/70 select-none">
+                  {coach.data.name.split(' ').map((s) => s[0]).join('')}
+                </span>
+              )}
+            </div>
+            <div>
+              <h3 class="font-display text-xl font-bold text-bordo">{coach.data.name}</h3>
+              <p class="text-sm font-semibold text-terra-dark mt-1">
+                Опыт: {coach.data.experience} · {coach.data.specialization}
+              </p>
+              <p class="text-warmgray/90 mt-3 leading-relaxed">{coach.data.teachingStyle}</p>
+              {coach.data.achievements && (
+                <p class="text-warmgray/70 text-sm mt-2">🏆 {coach.data.achievements}</p>
+              )}
+              {coach.data.contact && (
+                <p class="text-sm mt-2">
+                  Контакты: <span class="font-semibold text-bordo">{coach.data.contact}</span>
+                </p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p class="text-warmgray/70 italic mb-16">Информация о тренерах скоро появится.</p>
+    )}
+
+    <!-- КОНТАКТЫ И КАРТА -->
+    <h2 id="kontakty" class="font-display text-3xl font-bold text-bordo mb-3">Контакты</h2>
+    <p class="text-warmgray/80 mb-8 max-w-2xl">
+      Приходите — покажем зал и ответим на вопросы. Лучше заранее записаться по телефону
+      или через форму на сайте.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 space-y-4 text-warmgray/90">
+        <p><span class="font-semibold text-bordo block mb-1">📍 Адрес студии</span>
+          г. Москва, ул. Примерная, д. 1 (вставьте настоящий адрес)</p>
+        <p><span class="font-semibold text-bordo block mb-1">📞 Телефон</span>
+          <a href="tel:+70000000000" class="underline hover:text-terra-dark">+7 (XXX) XXX-XX-XX</a></p>
+        <p><span class="font-semibold text-bordo block mb-1">✉️ E-mail</span>
+          <a href="mailto:info@example.ru" class="underline hover:text-terra-dark">info@example.ru</a></p>
+        <p><span class="font-semibold text-bordo block mb-1">🕐 Расписание</span>
+          Пн–Пт: 10:00–22:00 · Сб: 11:00–18:00 · Вс: выходной</p>
+        <p class="pt-2">
+          <a href="/#zapis" class="inline-block px-5 py-3 rounded-xl bg-terra hover:bg-terra-light text-white font-semibold transition-colors">
+            Записаться на пробное занятие
+          </a>
+        </p>
+      </div>
+
+      <!-- Яндекс.Карты: iframe с lazy-loading -->
+      <div class="rounded-2xl overflow-hidden shadow-lg min-h-[380px] bg-sand">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?url=https%3A%2F%2Fyandex.ru%2Fmaps%2F-%2FCXbhAWl1"
+          title="Размещение клуба на Яндекс.Картах"
+          width="100%" height="100%" style="min-height:380px;border:0"
+          loading="lazy" allowFullScreen
+        ></iframe>
+      </div>
+    </div>
+
+    <p class="mt-4 text-sm text-warmgray/60">
+      Не видите карту? Откройте наше размещение напрямую:
+      <a href="https://yandex.ru/maps/-/CXbhAWl1" target="_blank" rel="noopener noreferrer" class="text-terra-dark underline hover:text-terra">
+        метка на Яндекс.Картах →
+      </a>
+    </p>
+  </section>
+</BaseLayout>
